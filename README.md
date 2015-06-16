@@ -1,1 +1,1 @@
-# react-flux-components
+# react-flux-dashboard
