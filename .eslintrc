@@ -24,12 +24,14 @@
         "globalReturn": false,
         "jsx": true
     },
+
     "plugins": [
         "react"
     ],
 
     "env": {
-        "browser": true
+        "browser": true,
+        "node": true
     },
 
     "rules": {
