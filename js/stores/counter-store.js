@@ -1,7 +1,6 @@
 import {EventEmitter} from 'events';
 import counterConstants from '../constants/counter-constants';
 import dispatcher from '../dispatcher/dispatcher';
-// import assign from 'object-assign';
 import counterWebApiUtils from '../utils/counter-web-api-utils';
 import _ from 'lodash';
 
@@ -10,8 +9,24 @@ const CHANGE_EVENT = 'change';
 let counters = {};
 
 class CounterStore extends EventEmitter {
-    getAll() {
+    getCounters() {
         return counters;
+    }
+
+    getCounter(id) {
+        return counters[id];
+    }
+
+    incrementCounter(id) {
+        counters[id].count += 1;
+        console.log('inc: ' + counters[id].count);
+        return counters[id].count;
+    }
+
+    decrementCounter(id) {
+        counters[id].count -= 1;
+        console.log('dec: ' + counters[id].count);
+        return counters[id].count;
     }
 
     emitChange() {
@@ -32,11 +47,25 @@ const counterStore = new CounterStore();
 export default counterStore;
 
 // Register callback to handle all updates
-dispatcher.register((action) => {
-    switch (action.actionType) {
+dispatcher.register((payload) => {
+    switch (payload.actionType) {
         case counterConstants.GET_COUNTERS:
             counterWebApiUtils.getCounters().on('value', (data) => {
                 counters = _.values(data.val());
+                counterStore.emitChange();
+            });
+
+            break;
+
+        case counterConstants.INCREMENT_COUNTER:
+            counterWebApiUtils.updateCounter(payload.id, counterStore.incrementCounter(payload.id)).on('value', () => {
+                counterStore.emitChange();
+            });
+
+            break;
+
+        case counterConstants.DECREMENT_COUNTER:
+            counterWebApiUtils.updateCounter(payload.id, counterStore.decrementCounter(payload.id)).on('value', () => {
                 counterStore.emitChange();
             });
 

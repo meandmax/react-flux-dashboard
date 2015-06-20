@@ -1,20 +1,30 @@
 import React from 'react';
 
+import counterActions from '../actions/counter-actions.js';
+
 export default class CounterItem extends React.Component {
-     constructor(props) {
+    constructor(props) {
         super(props);
 
-        this.onIncrement = () => {};
-        this.onDecrement = () => {};
-    }
+        this.onIncrement = () => {
+            counterActions.incrementCounter(this.props.id);
+        };
+
+        this.onDecrement = () => {
+            counterActions.decrementCounter(this.props.id);
+        };
+        this.componentWillReceiveProps = () => {
+            this.forceUpdate();
+        };
+    };
 
     render() {
         return (
             <li>
                 <span className="counter-name">{this.props.name}</span>
-                <button className="minus btn btn-red" onClick={this.onIncrement}>-</button>
+                <button className="minus btn btn-red" onClick={this.onDecrement}>-</button>
                 <span className="count">{this.props.count}</span>
-                <button className="plus btn btn-red" onClick={this.onDecrement}>+</button>
+                <button className="plus btn btn-red" onClick={this.onIncrement}>+</button>
             </li>
         );
     }
@@ -23,6 +33,9 @@ export default class CounterItem extends React.Component {
 CounterItem.displayName = 'CounterItem';
 
 CounterItem.propTypes = {
-    count: React.PropTypes.string,
+    count: React.PropTypes.number,
+    counterStore: React.PropTypes.object,
+    id: React.PropTypes.string,
+    key: React.PropTypes.string,
     name: React.PropTypes.string
 };

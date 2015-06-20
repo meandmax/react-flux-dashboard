@@ -1,20 +1,46 @@
 import React from 'react';
+import counterStore from '../stores/counter-store.js';
+import counterActions from '../actions/counter-actions.js';
 import CounterItem from './counter-item';
 import CounterInput from './counter-input';
 
 export default class Counters extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.componentDidMount = () => {
+            counterActions.getCounters();
+        };
+
+        this.componentWillMount = () => {
+            counterStore.addChangeListener(this.onStoreChange);
+        };
+
+        this.componentWillUnmount = () => {
+            counterStore.addChangeListener(this.onStoreChange);
+        };
+
+        this.onStoreChange = () => {
+            this.forceUpdate();
+        };
+    }
+
     render() {
-        if (Object.keys(this.props.counters).length < 1) {
+        let allCounters = counterStore.getCounters();
+
+        if (Object.keys(allCounters).length < 1) {
             return null;
         }
 
-        let allCounters = this.props.counters;
         let counters = [];
 
         for (let key in allCounters) {
             if (allCounters) {
                 counters.push(<CounterItem
                     count={allCounters[key].count}
+                    counterStore={counterStore}
+                    id={key}
+                    key={key}
                     name={allCounters[key].name}
                 />);
             }
@@ -31,7 +57,3 @@ export default class Counters extends React.Component {
 }
 
 Counters.displayName = 'Counters';
-
-Counters.propTypes = {
-    counters: React.PropTypes.object
-};
