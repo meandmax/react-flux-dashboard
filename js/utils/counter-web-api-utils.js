@@ -24,6 +24,14 @@ export default {
         return counter;
     },
 
+    deleteCounter: (id) => {
+        let counter = fb.child('/counters/' + id);
+
+        counter.remove();
+
+        return counter;
+    },
+
     addCounter: (count, name) => {
         let counters = fb.child('/counters/');
 
@@ -32,12 +40,6 @@ export default {
             name
         };
 
-        let ref = counters.push(counterObj, onComplete).key();
-
-        return {
-            ref,
-            count,
-            name
-        };
+        return counters.push(counterObj, onComplete);
     }
 };

@@ -14,6 +14,10 @@ export default class CounterItem extends React.Component {
             counterActions.decrementCounter(this.props.id, this.props.count);
         };
 
+        this.onDelete = () => {
+            counterActions.deleteCounter(this.props.id);
+        };
+
         this.componentWillReceiveProps = () => {
             this.forceUpdate();
         };
@@ -26,6 +30,7 @@ export default class CounterItem extends React.Component {
                 <button className="minus btn btn-red" onClick={this.onDecrement}>-</button>
                 <span className="count">{this.props.count}</span>
                 <button className="plus btn btn-red" onClick={this.onIncrement}>+</button>
+                <button className="delete btn btn-yellow" onClick={this.onDelete}>Delete</button>
             </li>
         );
     }

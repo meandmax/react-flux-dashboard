@@ -47,11 +47,19 @@ dispatcher.register((payload) => {
 
         case counterConstants.ADD_COUNTER:
             counterWebApiUtils.addCounter(payload.count, payload.name).on('value', (data) => {
-                counters[data.ref] = {
-                    name: data.name,
-                    count: data.count
+                counters[data.key()] = {
+                    name: payload.name,
+                    count: payload.count
                 };
 
+                counterStore.emitChange();
+            });
+
+            break;
+
+        case counterConstants.DELETE_COUNTER:
+            counterWebApiUtils.deleteCounter(payload.id).on('value', () => {
+                delete counters[payload.id];
                 counterStore.emitChange();
             });
 

@@ -23,9 +23,10 @@ export default {
         });
     },
 
-    removeCounter: () => {
+    deleteCounter: (id) => {
         Dispatcher.dispatch({
-            actionType: counterConstants.REMOVE_COUNTER
+            actionType: counterConstants.DELETE_COUNTER,
+            id
         });
     },
 

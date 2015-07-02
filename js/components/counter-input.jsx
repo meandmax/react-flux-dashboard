@@ -50,7 +50,7 @@ export default class CounterInput extends React.Component {
                     value={this.state.value}
                 />
 
-                <button className="add btn btn-blue" onClick={this.Enter}>add counter</button>
+                <button className="add btn btn-blue" onClick={this.save}>add counter</button>
             </div>
         );
     }
