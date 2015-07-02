@@ -15,11 +15,11 @@ export default {
         });
     },
 
-    addCounter: (name, count) => {
+    addCounter: (name) => {
         Dispatcher.dispatch({
             actionType: counterConstants.ADD_COUNTER,
-            name,
-            count
+            count: 0,
+            name
         });
     },
 
@@ -29,20 +29,18 @@ export default {
         });
     },
 
-    incrementCounter: (id) => {
-        console.log('INCREMENT_COUNTER');
-
+    incrementCounter: (id, count) => {
         Dispatcher.dispatch({
             actionType: counterConstants.INCREMENT_COUNTER,
+            count: count += 1,
             id
         });
     },
 
-    decrementCounter: (id) => {
-        console.log('DECREMENT_COUNTER');
-
+    decrementCounter: (id, count) => {
         Dispatcher.dispatch({
             actionType: counterConstants.DECREMENT_COUNTER,
+            count: count -= 1,
             id
         });
     }

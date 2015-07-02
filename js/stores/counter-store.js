@@ -2,7 +2,7 @@ import {EventEmitter} from 'events';
 import counterConstants from '../constants/counter-constants';
 import dispatcher from '../dispatcher/dispatcher';
 import counterWebApiUtils from '../utils/counter-web-api-utils';
-import _ from 'lodash';
+// import _ from 'lodash';
 
 const CHANGE_EVENT = 'change';
 
@@ -15,18 +15,6 @@ class CounterStore extends EventEmitter {
 
     getCounter(id) {
         return counters[id];
-    }
-
-    incrementCounter(id) {
-        counters[id].count += 1;
-        console.log('inc: ' + counters[id].count);
-        return counters[id].count;
-    }
-
-    decrementCounter(id) {
-        counters[id].count -= 1;
-        console.log('dec: ' + counters[id].count);
-        return counters[id].count;
     }
 
     emitChange() {
@@ -51,21 +39,35 @@ dispatcher.register((payload) => {
     switch (payload.actionType) {
         case counterConstants.GET_COUNTERS:
             counterWebApiUtils.getCounters().on('value', (data) => {
-                counters = _.values(data.val());
+                counters = data.val();
+                counterStore.emitChange();
+            });
+
+            break;
+
+        case counterConstants.ADD_COUNTER:
+            counterWebApiUtils.addCounter(payload.count, payload.name).on('value', (data) => {
+                counters[data.ref] = {
+                    name: data.name,
+                    count: data.count
+                };
+
                 counterStore.emitChange();
             });
 
             break;
 
         case counterConstants.INCREMENT_COUNTER:
-            counterWebApiUtils.updateCounter(payload.id, counterStore.incrementCounter(payload.id)).on('value', () => {
+            counterWebApiUtils.updateCounter(payload.id, payload.count).on('value', () => {
+                counters[payload.id].count = payload.count;
                 counterStore.emitChange();
             });
 
             break;
 
         case counterConstants.DECREMENT_COUNTER:
-            counterWebApiUtils.updateCounter(payload.id, counterStore.decrementCounter(payload.id)).on('value', () => {
+            counterWebApiUtils.updateCounter(payload.id, payload.count).on('value', () => {
+                counters[payload.id].count = payload.count;
                 counterStore.emitChange();
             });
 

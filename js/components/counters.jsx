@@ -49,7 +49,11 @@ export default class Counters extends React.Component {
         return (
             <div className="counter-app">
                 <h2 className="title">Counters</h2>
-                <CounterInput />
+                <CounterInput
+                    className="input"
+                    placeholder="Type here"
+                />
+
                 <ul className="counter-list">{counters}</ul>
             </div>
         );

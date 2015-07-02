@@ -7,12 +7,13 @@ export default class CounterItem extends React.Component {
         super(props);
 
         this.onIncrement = () => {
-            counterActions.incrementCounter(this.props.id);
+            counterActions.incrementCounter(this.props.id, this.props.count);
         };
 
         this.onDecrement = () => {
-            counterActions.decrementCounter(this.props.id);
+            counterActions.decrementCounter(this.props.id, this.props.count);
         };
+
         this.componentWillReceiveProps = () => {
             this.forceUpdate();
         };

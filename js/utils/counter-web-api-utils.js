@@ -13,7 +13,7 @@ const onComplete = (error) => {
 
 export default {
     getCounters: () => {
-        return  fb.child('/counters/');
+        return fb.child('/counters/');
     },
 
     updateCounter: (id, value) => {
@@ -22,5 +22,22 @@ export default {
         counter.set(value, onComplete);
 
         return counter;
+    },
+
+    addCounter: (count, name) => {
+        let counters = fb.child('/counters/');
+
+        let counterObj = {
+            count,
+            name
+        };
+
+        let ref = counters.push(counterObj, onComplete).key();
+
+        return {
+            ref,
+            count,
+            name
+        };
     }
 };
