@@ -1,4 +1,4 @@
-# React, Flux, and Firebase Dashboard
+# React Flux & Firebase Dashboard
 
 react-flux-dashboard is an application built with flux, react and firebase to show how the different concepts and technologies all working together. The intention is to build a whole dashboard of all kinds of widgets to show how react and flux works with multiple stores and components.
 
@@ -7,8 +7,7 @@ react-flux-dashboard is an application built with flux, react and firebase to sh
 - React UI
 - Flux architecture
 - Firebase
-- a simple router (made with #Hasher)
-- Sass (with Neat, Bitters)
+- SASS
 - Webpack builds
 - ES6 syntax (Babel)
 
