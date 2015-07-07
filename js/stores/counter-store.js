@@ -2,7 +2,6 @@ import {EventEmitter} from 'events';
 import counterConstants from '../constants/counter-constants';
 import dispatcher from '../dispatcher/dispatcher';
 import counterWebApiUtils from '../utils/counter-web-api-utils';
-// import _ from 'lodash';
 
 const CHANGE_EVENT = 'change';
 

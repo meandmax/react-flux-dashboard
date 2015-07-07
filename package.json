@@ -34,7 +34,6 @@
     "flux": "^2.0.3",
     "http-server": "^0.8.0",
     "keymirror": "^0.1.1",
-    "lodash": "^3.9.3",
     "react": "^0.13.3"
   },
   "devDependencies": {
