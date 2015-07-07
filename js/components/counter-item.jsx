@@ -40,7 +40,6 @@ CounterItem.displayName = 'CounterItem';
 
 CounterItem.propTypes = {
     count: React.PropTypes.number,
-    counterStore: React.PropTypes.object,
     id: React.PropTypes.string,
     key: React.PropTypes.string,
     name: React.PropTypes.string

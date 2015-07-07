@@ -38,7 +38,6 @@ export default class Counters extends React.Component {
             if (allCounters) {
                 counters.push(<CounterItem
                     count={allCounters[key].count}
-                    counterStore={counterStore}
                     id={key}
                     key={key}
                     name={allCounters[key].name}
