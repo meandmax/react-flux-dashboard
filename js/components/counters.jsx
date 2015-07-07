@@ -17,7 +17,7 @@ export default class Counters extends React.Component {
         };
 
         this.componentWillUnmount = () => {
-            counterStore.addChangeListener(this.onStoreChange);
+            counterStore.removeChangeListener(this.onStoreChange);
         };
 
         this.onStoreChange = () => {
