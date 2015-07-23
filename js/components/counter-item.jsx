@@ -17,10 +17,6 @@ export default class CounterItem extends React.Component {
         this.onDelete = () => {
             counterActions.deleteCounter(this.props.id);
         };
-
-        this.componentWillReceiveProps = () => {
-            this.forceUpdate();
-        };
     };
 
     render() {

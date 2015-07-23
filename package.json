@@ -4,7 +4,7 @@
   "description": "react dashboard built with flux architecture",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server --hot --progress --colors --port 3002"
+    "start": "./node_modules/.bin/webpack-dev-server --progress --colors --port 3002"
   },
   "author": {
     "name": "Maximilian Heinz",
@@ -50,7 +50,7 @@
     "react-hot-loader": "^1.2.7",
     "sass-loader": "^1.0.2",
     "style-loader": "^0.12.3",
-    "webpack": "^1.9.10",
+    "webpack": "^1.10.1",
     "webpack-dev-server": "^1.9.0"
   }
 }
